@@ -1,0 +1,583 @@
+{
+	"info": {
+		"_postman_id": "44a18ed9-e9c1-456b-8b33-2c171c794720",
+		"name": "JebishaProductListing",
+		"description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50309784",
+		"_collection_link": "https://jebishair24bcs120-6576059.postman.co/workspace/JEBISHA-I-R-24BCS120's-Workspac~aa636161-f410-485f-8aea-077411759db3/collection/50309784-44a18ed9-e9c1-456b-8b33-2c171c794720?action=share&source=collection_link&creator=50309784"
+	},
+	"item": [
+		{
+			"name": "GetallProducts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code verify\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"status message verify\",function()",
+							"{",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"pm.test(\"status code below verify\",function()",
+							"{",
+							"    pm.expect(pm.response.code).to.be.above(199);",
+							"})",
+							"pm.test(\"verify response time\",function()",
+							"{",
+							"    pm.expect(pm.response.responseTime).to.be.below(9000)",
+							"})",
+							"pm.expect(\"verify response time\",function()",
+							"{",
+							"    pm.expect(pm.response.responseTime).to.be.above(0);",
+							"",
+							"})",
+							"pm.test(\"check Multiple headers\",function()",
+							"{",
+							"    data=[\"content-Length\",\"content-Type\",\"Date\"];",
+							"    data.forEach( h=>",
+							"    {",
+							"        pm.response.to.have.header(h);",
+							"",
+							"    })",
+							"});",
+							"pm.test(\"Test status code using if-else\",function()",
+							"{",
+							"    let data=pm.response.code;",
+							"    if(data===200)",
+							"    {",
+							"        pm.response.to.have.status(\"OK\");",
+							"    }",
+							"    else",
+							"    {",
+							"        pm.expect(data).to.eql(\"Not Found\");",
+							"",
+							"    }",
+							"});",
+							"pm.test(\"status code is not in oneof function \",function()",
+							"{",
+							"    pm.expect(pm.response.code).to.not.oneOf([201,202,203,204,205,206,207]);",
+							"",
+							"})",
+							"pm.test(\"content-Length value check\",function()",
+							"{",
+							"    let data=pm.response.headers.get(\"Content-Length\");",
+							"    pm.expect(Number(data)).to.be.above(0);",
+							"",
+							"});",
+							"",
+							"pm.test(\"Content-Length\",function()",
+							"{",
+							"    let data=pm.response.headers.get(\"Content-Length\");",
+							"    pm.expect(Number(data)).to.be.below(8000);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response exist or not\",function()",
+							"{",
+							"    pm.expect(pm.response.text()).to.not.be.empty;",
+							"})",
+							"",
+							"",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/products",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"products"
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "CreatenewUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(4000)\r",
+							"\r",
+							"})\r",
+							"pm.expect(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.above(300);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"Response exist or not\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"})\r",
+							"pm.test(\"verify property exists\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"productname\");\r",
+							"})\r",
+							"pm.test(\"verify value of the property  exists\",function()\r",
+							"{\r",
+							"    let data=pm.response.json().price;\r",
+							"    pm.expect(Number(data)).to.be.above(0);\r",
+							"})\r",
+							"pm.test(\"verify value datatype\",function()\r",
+							"{\r",
+							"     pm.expect(pm.response.json().price).to.be.a('string');\r",
+							"})\r",
+							"pm.test(\"product_price value below range check\",function()\r",
+							"{\r",
+							"    pm.expect(Number(pm.response.json().price)).to.be.below(500);\r",
+							"})\r",
+							"pm.test(\"check Multiple headers\",function()\r",
+							"{\r",
+							"   const data=[\"Content-Length\",\"Content-Type\",\"Date\"];\r",
+							"    data.forEach(h=>\r",
+							"    {\r",
+							"        pm.response.to.have.header(h);\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Test status code using if-else\",function()\r",
+							"{\r",
+							"    const data=pm.response.code;\r",
+							"    if(data===200)\r",
+							"    {\r",
+							"        pm.response.to.have.status(\"OK\");\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(201);\r",
+							"    }\r",
+							"    });\r",
+							"    pm.test(\"status code verify\",function()\r",
+							"    {\r",
+							"        pm.response.to.have.status(\"Created\");\r",
+							"    })\r",
+							"    pm.test(\"status code in range\",function()\r",
+							"    {\r",
+							"        pm.expect(pm.response.code).to.be.within(200,404);\r",
+							"\r",
+							"    })\r",
+							"    pm.collectionVariables.set(\"id\", pm.response.json().id);\r",
+							"    "
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productname\":\"laptop\",\n    \"price\":\"190\",\n    \"stock\":true\n\n    \n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/products",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"products"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Getbyid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code verify\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"status message verify\",function()",
+							"{",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"pm.test(\"status code below verify\",function()",
+							"{",
+							"    pm.expect(pm.response.code).to.eql(200);",
+							"});",
+							"pm.test(\"verify response time\",function()",
+							"{",
+							"    pm.expect(pm.response.responseTime).to.be.below(9000)",
+							"})",
+							"pm.expect(\"verify response time\",function()",
+							"{",
+							"    pm.expect(pm.response.responseTime).to.be.above(0);",
+							"",
+							"})",
+							"pm.test(\"check Multiple headers\",function()",
+							"{",
+							"    data=[\"content-Length\",\"content-Type\",\"Date\"];",
+							"    data.forEach( h=>",
+							"    {",
+							"        pm.response.to.have.header(h);",
+							"",
+							"    })",
+							"});",
+							"pm.test(\"Test status code using if-else\",function()",
+							"{",
+							"    let data=pm.response.code;",
+							"    if(data===200)",
+							"    {",
+							"        pm.expect(data).to.eql(200);",
+							"    }",
+							"    else",
+							"    {",
+							"        pm.expect(data).to.eql(404);",
+							"",
+							"    }",
+							"});",
+							"pm.test(\"status code is not in oneof function \",function()",
+							"{",
+							"    pm.expect(pm.response.code).to.not.oneOf([201,202,203,204,205,206,207]);",
+							"",
+							"})",
+							"pm.test(\"content-Length value check\",function()",
+							"{",
+							"    let data=pm.response.headers.get(\"Content-Length\");",
+							"    pm.expect(Number(data)).to.be.above(0);",
+							"",
+							"});",
+							"",
+							"pm.test(\"Content-Length\",function()",
+							"{",
+							"    let data=pm.response.headers.get(\"Content-Length\");",
+							"    pm.expect(Number(data)).to.be.below(8000);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response exist or not\",function()",
+							"{",
+							"    pm.expect(pm.response.text()).to.not.be.empty;",
+							"})",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/products/{{id}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"products",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code verify\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"status message verify\",function()\r",
+							"{\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"status code below verify\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.be.above(199);\r",
+							"})\r",
+							"pm.test(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(9000)\r",
+							"})\r",
+							"pm.expect(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.above(0);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"check Multiple headers\",function()\r",
+							"{\r",
+							"    data=[\"content-Length\",\"content-Type\",\"Date\"];\r",
+							"    data.forEach( h=>\r",
+							"    {\r",
+							"        pm.response.to.have.header(h);\r",
+							"\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Test status code using if-else\",function()\r",
+							"{\r",
+							"    let data=pm.response.code;\r",
+							"    if(data===200)\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(200);\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(200);\r",
+							"\r",
+							"    }\r",
+							"});\r",
+							"pm.test(\"status code is not in oneof function \",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.not.oneOf([201,202,203,204,205,206,207]);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"content-Length value check\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.above(0);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Length\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.below(8000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response exist or not\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"productname\": \"vivo\",\r\n    \"price\": \"12000\",\r\n    \"stock\": true,\r\n    \"id\":{{id}}\r\n}\r\n    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/products/{{id}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"products",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code verify\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"status message verify\",function()\r",
+							"{\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"status code below verify\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.be.above(199);\r",
+							"})\r",
+							"pm.test(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(5000)\r",
+							"})\r",
+							"pm.expect(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.above(0);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"check Multiple headers\",function()\r",
+							"{\r",
+							"    data=[\"content-Length\",\"content-Type\",\"Date\"];\r",
+							"    data.forEach( h=>\r",
+							"    {\r",
+							"        pm.response.to.have.header(h);\r",
+							"\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Test status code using if-else\",function()\r",
+							"{\r",
+							"    let data=pm.response.code;\r",
+							"    if(data===200)\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(200);\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(404);\r",
+							"\r",
+							"    }\r",
+							"});\r",
+							"pm.test(\"status code is not in oneof function \",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.not.oneOf([201,202,203,204,205,206,207]);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"content-Length value check\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.above(0);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Length\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.below(8000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response exist or not\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/products/{{id}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"products",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "47"
+		},
+		{
+			"key": "BaseUrl",
+			"value": "https://69243efe3ad095fb847358ac.mockapi.io"
+		}
+	]
+}

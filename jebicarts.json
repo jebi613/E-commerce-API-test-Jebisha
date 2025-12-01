@@ -1,0 +1,545 @@
+{
+	"info": {
+		"_postman_id": "3e49e026-e33a-415e-89bb-106dd8285bb9",
+		"name": "jebicarts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50309784",
+		"_collection_link": "https://jebishair24bcs120-6576059.postman.co/workspace/JEBISHA-I-R-24BCS120's-Workspac~aa636161-f410-485f-8aea-077411759db3/collection/50309784-3e49e026-e33a-415e-89bb-106dd8285bb9?action=share&source=collection_link&creator=50309784"
+	},
+	"item": [
+		{
+			"name": "getallproducts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code verify\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"status message verify\",function()\r",
+							"{\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"status code below verify\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.be.above(199);\r",
+							"})\r",
+							"pm.test(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(9000)\r",
+							"})\r",
+							"pm.expect(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.above(0);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"check Multiple headers\",function()\r",
+							"{\r",
+							"    data=[\"content-Length\",\"content-Type\",\"Date\"];\r",
+							"    data.forEach( h=>\r",
+							"    {\r",
+							"        pm.response.to.have.header(h);\r",
+							"\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Test status code using if-else\",function()\r",
+							"{\r",
+							"    let data=pm.response.code;\r",
+							"    if(data===200)\r",
+							"    {\r",
+							"        pm.response.to.have.status(\"OK\");\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(\"Not Found\");\r",
+							"\r",
+							"    }\r",
+							"});\r",
+							"pm.test(\"status code is not in oneof function \",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.not.oneOf([201,202,203,204,205,206,207]);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"content-Length value check\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.above(0);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Length\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.below(8000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response exist or not\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://69243efe3ad095fb847358ac.mockapi.io/carts",
+					"protocol": "https",
+					"host": [
+						"69243efe3ad095fb847358ac",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createnewuser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(4000)\r",
+							"\r",
+							"})\r",
+							"pm.expect(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.above(300);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"Response exist or not\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"})\r",
+							"pm.test(\"verify property exists\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.json()).to.have.property(\"ProductName\");\r",
+							"})\r",
+							"pm.test(\"verify value of the property  exists\",function()\r",
+							"{\r",
+							"    let data=pm.response.json().ProductCount;\r",
+							"    pm.expect(Number(data)).to.be.above(0);\r",
+							"})\r",
+							"pm.test(\"verify value datatype\",function()\r",
+							"{\r",
+							"     pm.expect(pm.response.json().ProductCount).to.be.a(\"Number\");\r",
+							"})\r",
+							"pm.test(\"product_price value below range check\",function()\r",
+							"{\r",
+							"    pm.expect(Number(pm.response.json().ProductCount)).to.be.below(500);\r",
+							"})\r",
+							"pm.test(\"check Multiple headers\",function()\r",
+							"{\r",
+							"   const data=[\"Content-Length\",\"Content-Type\",\"Date\"];\r",
+							"    data.forEach(h=>\r",
+							"    {\r",
+							"        pm.response.to.have.header(h);\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Test status code using if-else\",function()\r",
+							"{\r",
+							"    const data=pm.response.code;\r",
+							"    if(data===200)\r",
+							"    {\r",
+							"        pm.response.to.have.status(\"OK\");\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(201);\r",
+							"    }\r",
+							"    });\r",
+							"    pm.test(\"status code verify\",function()\r",
+							"    {\r",
+							"        pm.response.to.have.status(\"Created\");\r",
+							"    })\r",
+							"    pm.test(\"status code in range\",function()\r",
+							"    {\r",
+							"        pm.expect(pm.response.code).to.be.within(200,404);\r",
+							"\r",
+							"    })\r",
+							"    pm.collectionVariables.set(\"id\", pm.response.json().id);\r",
+							"    "
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://69243efe3ad095fb847358ac.mockapi.io/carts",
+					"protocol": "https",
+					"host": [
+						"69243efe3ad095fb847358ac",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code verify\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"status message verify\",function()\r",
+							"{\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"status code below verify\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.be.above(199);\r",
+							"})\r",
+							"pm.test(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(9000)\r",
+							"})\r",
+							"pm.expect(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.above(0);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"check Multiple headers\",function()\r",
+							"{\r",
+							"    data=[\"content-Length\",\"content-Type\",\"Date\"];\r",
+							"    data.forEach( h=>\r",
+							"    {\r",
+							"        pm.response.to.have.header(h);\r",
+							"\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Test status code using if-else\",function()\r",
+							"{\r",
+							"    let data=pm.response.code;\r",
+							"    if(data===404)\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(200);\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(200);\r",
+							"\r",
+							"    }\r",
+							"});\r",
+							"pm.test(\"status code is not in oneof function \",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.not.oneOf([201,202,203,204,205,206,207]);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"content-Length value check\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.above(0);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Length\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.below(8000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response exist or not\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ProductName\": \"Elegant Marble Chips\",\r\n    \"ProductCount\": 67,\r\n    \"id\": {{id}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://69243efe3ad095fb847358ac.mockapi.io/carts/{{id}}",
+					"protocol": "https",
+					"host": [
+						"69243efe3ad095fb847358ac",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"carts",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getbyid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code verify\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"status message verify\",function()\r",
+							"{\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"status code below verify\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.eql(200)\r",
+							"});\r",
+							"pm.test(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(10000)\r",
+							"})\r",
+							"pm.expect(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.above(0);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"check Multiple headers\",function()\r",
+							"{\r",
+							"    data=[\"content-Length\",\"content-Type\",\"Date\"];\r",
+							"    data.forEach( h=>\r",
+							"    {\r",
+							"        pm.response.to.have.header(h);\r",
+							"\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Test status code using if-else\",function()\r",
+							"{\r",
+							"    let data=pm.response.code;\r",
+							"    if(data===200)\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(200);\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(404);\r",
+							"\r",
+							"    }\r",
+							"});\r",
+							"pm.test(\"status code is not in oneof function \",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.not.oneOf([201,202,203,204,205,206,207]);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"content-Length value check\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.above(0);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Length\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.below(8000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response exist or not\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://69243efe3ad095fb847358ac.mockapi.io/carts/{{id}}",
+					"protocol": "https",
+					"host": [
+						"69243efe3ad095fb847358ac",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"carts",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code verify\", function () {\r",
+							"    pm.response.to.have.status(200)\r",
+							"});\r",
+							"pm.test(\"status message verify\",function()\r",
+							"{\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"status code below verify\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.be.above(199);\r",
+							"})\r",
+							"pm.test(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(5000)\r",
+							"})\r",
+							"pm.expect(\"verify response time\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.responseTime).to.be.above(0);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"check Multiple headers\",function()\r",
+							"{\r",
+							"    data=[\"content-Length\",\"content-Type\",\"Date\"];\r",
+							"    data.forEach( h=>\r",
+							"    {\r",
+							"        pm.response.to.have.header(h);\r",
+							"\r",
+							"    })\r",
+							"});\r",
+							"pm.test(\"Test status code using if-else\",function()\r",
+							"{\r",
+							"    let data=pm.response.code;\r",
+							"    if(data===200)\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(200);\r",
+							"    }\r",
+							"    else\r",
+							"    {\r",
+							"        pm.expect(data).to.eql(404);\r",
+							"\r",
+							"    }\r",
+							"});\r",
+							"pm.test(\"status code is not in oneof function \",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.code).to.not.oneOf([201,202,203,204,205,206,207]);\r",
+							"\r",
+							"})\r",
+							"pm.test(\"content-Length value check\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.above(0);\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Length\",function()\r",
+							"{\r",
+							"    let data=pm.response.headers.get(\"Content-Length\");\r",
+							"    pm.expect(Number(data)).to.be.below(8000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response exist or not\",function()\r",
+							"{\r",
+							"    pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://69243efe3ad095fb847358ac.mockapi.io/carts/{{id}}",
+					"protocol": "https",
+					"host": [
+						"69243efe3ad095fb847358ac",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"carts",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": ""
+		}
+	]
+}
